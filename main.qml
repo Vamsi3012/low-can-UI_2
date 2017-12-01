@@ -9,7 +9,7 @@ ApplicationWindow {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Hello World")
+    title: qsTr("CAN Cloud demo application")
 
     property var msgid_enu: { "call":2, "retok":3, "reterr":4, "event":5 }
     property double engineSpeed: 0.0
@@ -49,7 +49,7 @@ ApplicationWindow {
                 console.log("EVENT: TRUE ");
                 if(json_message[1] === "low-can/messages.engine.speed"){
                     engineSpeed = json_message[2].data.value;
-                    api_verb_str = "hono/send";
+                    api_verb_str = "hono/sendt";
                     websocket.active = true;
                     console.log("Websocket Status ; ", websocket.status);
                     request_str = '[' + msgid_enu.call + ',"99999","' + api_verb_str + '",{"host_name":"172.18.0.110", "sensor_id":"sensor2","port":"8080","field":"engine.speed","value":"' + engineSpeed +'","tenant_name":"DEFAULT_TENANT"}]';
@@ -58,28 +58,28 @@ ApplicationWindow {
                 }
                 else if (json_message[1] === "low-can/messages.engine.state.switch"){
                     engineStatus = json_message[2].data.value;
-                    api_verb_str = "hono/send";
+                    api_verb_str = "hono/sendt";
                     websocket.active = true;
                     console.log("Websocket Status ; ", websocket.status);
                     //engineState_val = engineStatus ? 1 : 0;
-                    request_str = '[' + msgid_enu.call + ',"99999","' + api_verb_str + '",{"host_name":"172.18.0.110", "sensor_id":"sensor4","port":"8080","field":"engine.state.switch","value":"' + engineStatus +'","tenant_name":"DEFAULT_TENANT"}]';
+                    request_str = '[' + msgid_enu.call + ',"99999","' + api_verb_str + '",{"host_name":"172.18.0.110", "sensor_id":"sensor3","port":"8080","field":"engine.state.switch","value":"' + engineStatus +'","tenant_name":"DEFAULT_TENANT"}]';
                     websocket.sendTextMessage(request_str);
                     console.log(request_str);
                 }
                 else if (json_message[1] === "low-can/messages.light.display"){
                     headLight = json_message[2].data.value;
-                    api_verb_str = "hono/send";
+                    api_verb_str = "hono/sendt";
                     websocket.active = true;
                     console.log("Websocket Status ; ", websocket.status);
                     //headLight_val = headLight ? 1 : 0;
-                    request_str = '[' + msgid_enu.call + ',"99999","' + api_verb_str + '",{"host_name":"172.18.0.110", "sensor_id":"sensor3","port":"8080","field":"Head Light Status","value":"' + headLight +'","tenant_name":"DEFAULT_TENANT"}]';
+                    request_str = '[' + msgid_enu.call + ',"99999","' + api_verb_str + '",{"host_name":"172.18.0.110", "sensor_id":"sensor4","port":"8080","field":"Head Light Status","value":"' + headLight +'","tenant_name":"DEFAULT_TENANT"}]';
                     websocket.sendTextMessage(request_str);
                     console.log(request_str);
                     console.log(json_message[2].data.timestamp);
                 }
                 else if (json_message[1] === "low-can/messages.hazard.light.switch"){
                     hazaradLight = json_message[2].data.value;
-                    api_verb_str = "hono/send";
+                    api_verb_str = "hono/sendt";
                     websocket.active = true;
                     console.log("Websocket Status ; ", websocket.status);
                     request_str = '[' + msgid_enu.call + ',"99999","' + api_verb_str + '",{"host_name":"172.18.0.110", "sensor_id":"sensor5","port":"8080","field":"Hazard Light Status","value":"' + hazaradLight +'","tenant_name":"DEFAULT_TENANT"}]';
